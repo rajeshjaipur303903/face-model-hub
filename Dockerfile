@@ -1,21 +1,14 @@
 # Dockerfile
-
-# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the Python script into the container
+COPY fetch_top_models.py /app/fetch_top_models.py
 
-# Install any needed packages specified in requirements.txt
+# Install the required Python packages
 RUN pip install requests
 
-# Make run_cron.sh executable
-RUN chmod +x run_cron.sh
-
-# Run the shell script that sets up and starts the cron job
-CMD ["./run_cron.sh"]
-
-
+# Run the Python script
+CMD ["python", "fetch_top_models.py"]
